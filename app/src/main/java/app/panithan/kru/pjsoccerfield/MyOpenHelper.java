@@ -21,9 +21,9 @@ public class MyOpenHelper extends SQLiteOpenHelper{
             "Address text, " +
             "Phone text);";
 
-    private static final String create_soccerfield_table = "create table SoccerfieldTABLE (" +
+    private static final String create_soccerfield_table = "create table soccerfieldTABLE (" +
             "_id integer priary key, " +
-            "Soccerfield text, " +
+            "soccerfield text, " +
             "Description text, " +
             "Price text, " +
             "URLicon text, " +
