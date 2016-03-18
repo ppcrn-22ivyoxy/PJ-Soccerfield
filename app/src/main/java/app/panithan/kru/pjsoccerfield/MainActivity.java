@@ -67,9 +67,34 @@ public class MainActivity extends AppCompatActivity {
         if (userString.equals("") || passwordString.equals("")) {
             MyAlert myAlert = new MyAlert();
             myAlert.myDialog(MainActivity.this, "กรุณากรอกข้อมูลให้ครบนะคะ");
+        } else {
+            checkUser();
+
         }
 
     } // Click SiginIn
+
+    private void checkUser() {
+
+        try {
+
+            String[] resuleStrings = myManage.searchUser(userString);
+
+            if (passwordString.equals(resuleStrings[2])) {
+                // Password True
+            } else {
+                //Password False
+                MyAlert myAlert = new MyAlert();
+                myAlert.myDialog(MainActivity.this, "ลองพิมพ์ใหม่คะ Password ผิดคะ");
+            }
+
+        } catch (Exception e) {
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(MainActivity.this, "ไม่มี " + userString + "ในฐานข้อมูลของเราค่ะ");
+
+        }
+
+    }   // Check User
 
     private void synJSONtoSQLite() {
 

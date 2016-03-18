@@ -2,6 +2,7 @@ package app.panithan.kru.pjsoccerfield;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -50,6 +51,30 @@ public class MyManage {
 
 
     }   // Constructor
+
+    public String[] searchUser(String strUser) {
+        try {
+            String[] resultString = null;
+            Cursor cursor = readSqLiteDatabase.query(user_table,
+                    new String[]{column_id, column_User, column_Password,
+                            column_Name, column_Address, column_Phone},
+                    column_User + "=?",
+                    new String[]{String.valueOf(strUser)},
+                    null, null, null, null);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    resultString = new String[cursor.getColumnCount()];
+                    for (int i = 0; i < cursor.getColumnCount(); i++) {
+                        resultString[i] = cursor.getString(i);
+                    }
+                }
+            }
+            cursor.close();
+            return resultString;
+        } catch (Exception e) {
+            return null;
+        }
+    } // searchuser
 
     public long addOrder(String strDate,
                          String strNameOrder,
